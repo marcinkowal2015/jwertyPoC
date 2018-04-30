@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jwerty proof of concept</title>
+</head>
+
+<body>
+    alt + c - working everywhere
+    <br>
+    alt + ctrl + s (alt gr + s) - working everywhere yet preventing default action - polish letter ś
+    <br>
+    alt + ctrl + o (alt gr + o) - worging everywhere - not preventing default action
+    <br>
+    alt - ctrl + l - not working in first and second input, woring in third one
+<div>
+    <div>First input <input id='firstInput'/></div>
+    <div>Second input <input id='secondInput'/></div>
+    <div>Third input <input id='thirdInput' /></div>
+</div>
+</body>
+<script src="jwerty.js"></script>
+<script>
+    var idRegistry = ['firstInput', 'secondInput'];
+
+    jwerty.key("alt+c", function() { alert("alt + c")});
+    jwerty.key("alt+ctrl+s", function() { alert("alt + ctrl + s - alt gr + s - blocking default action"); return false;});
+    jwerty.key("alt+ctrl+o", function() { alert("alt + ctrl + o - alt gr + o - non blocking input")});
+    jwerty.key("alt+ctrl+l", function() { 
+        if(idRegistry.indexOf(document.activeElement.id) !== -1) {
+            return true;
+        }
+        alert("alt + ctrl + l - alt gr + l - not working in input");
+        return false;
+    });
+</script>
+</html>
